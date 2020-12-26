@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "584958444526",
+    "firebase_url": "https://attendance-login-7e94a-default-rtdb.firebaseio.com",
+    "project_id": "attendance-login-7e94a",
+    "storage_bucket": "attendance-login-7e94a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584958444526:android:8a89a83d6317e3d8b884ff",
+        "android_client_info": {
+          "package_name": "com.ajstudios.notesapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584958444526-o9sh0so7c9d1gjpv80hhq6kicarqish0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtssLdha2_0gd7s3Ak5uN5S50WGL68MRw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584958444526-o9sh0so7c9d1gjpv80hhq6kicarqish0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
