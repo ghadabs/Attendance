@@ -66,11 +66,11 @@ public class Reports_Detail_Activity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
     }
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.only_dot, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -14,7 +14,7 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/out"
+        android:id="@+id/more"
         android:title="more"
         android:contentDescription="more"
         app:showAsAction="never"
