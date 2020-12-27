@@ -10,18 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.ajstudios.easyattendance.Reports_Detail_Activity"
+            android:name=".Reports_Detail_Activity"
             android:theme="@style/AppTheme2" />
-        <activity android:name="com.ajstudios.easyattendance.Reports_Activity" />
-        <activity android:name="com.ajstudios.easyattendance.Register" />
-        <activity android:name="com.ajstudios.easyattendance.MainActivity" />
+        <activity android:name=".Reports_Activity" />
+        <activity android:name=".Register" />
+        <activity android:name=".MainActivity" />
         <activity
-            android:name="com.ajstudios.easyattendance.ClassDetail_Activity"
+            android:name=".ClassDetail_Activity"
             android:theme="@style/FullScreenTheme" />
         <activity
-            android:name="com.ajstudios.easyattendance.Insert_class_Activity"
+            android:name=".Insert_class_Activity"
             android:theme="@style/AppTheme2" />
-        <activity android:name="com.ajstudios.easyattendance.Login">
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
