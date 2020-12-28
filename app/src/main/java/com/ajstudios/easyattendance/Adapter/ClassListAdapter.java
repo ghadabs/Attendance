@@ -4,23 +4,31 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 
 import com.ajstudios.easyattendance.R;
+import com.ajstudios.easyattendance.realm.Attendance_Students_List;
 import com.ajstudios.easyattendance.realm.Class_Names;
 import com.ajstudios.easyattendance.realm.Students_List;
 import com.ajstudios.easyattendance.viewholders.ViewHolder;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
 
-public class ClassListAdapter extends RealmRecyclerViewAdapter<Class_Names, ViewHolder> {
+public class ClassListAdapter extends RealmRecyclerViewAdapter<Class_Names, ViewHolder>  {
 
     private final Activity mActivity;
     RealmResults<Class_Names> mList;
+
 
     Realm realm;
     RealmChangeListener realmChangeListener;
@@ -31,7 +39,6 @@ public class ClassListAdapter extends RealmRecyclerViewAdapter<Class_Names, View
         Realm realm = Realm.getDefaultInstance();
         mActivity = context;
         mList = list;
-
 
     }
 
@@ -98,4 +105,5 @@ public class ClassListAdapter extends RealmRecyclerViewAdapter<Class_Names, View
         }
 
     }
+
 }

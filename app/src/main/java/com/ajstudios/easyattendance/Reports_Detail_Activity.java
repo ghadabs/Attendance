@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ajstudios.easyattendance.Adapter.Reports_Detail_Adapter;
@@ -23,7 +26,6 @@ public class Reports_Detail_Activity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     Reports_Detail_Adapter mAdapter;
-
     TextView subj, className, toolbar_title;
 
     Realm realm;
@@ -64,7 +66,6 @@ public class Reports_Detail_Activity extends AppCompatActivity {
 
         mAdapter = new Reports_Detail_Adapter( list,Reports_Detail_Activity.this, room_ID);
         recyclerView.setAdapter(mAdapter);
-
     }
    /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {

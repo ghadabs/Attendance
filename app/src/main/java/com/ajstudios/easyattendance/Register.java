@@ -11,30 +11,36 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ajstudios.easyattendance.Model.UserDetails;
+import com.ajstudios.easyattendance.realm.UserDetails;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Register extends AppCompatActivity {
+import java.util.UUID;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.exceptions.RealmPrimaryKeyConstraintException;
+
+public class Register extends AppCompatActivity {
+    private static final String TAG = "Register";
     EditText  username, address, password,university;
     Button btnSignUp;
     TextView tvSignIn;
-
-    FirebaseAuth mFirebaseAuth;
-    FirebaseDatabase firebaseDatabase;
-
+    Realm realm;
+    private UserDetails myRealmObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        Realm.init(this);
+        realm = Realm.getDefaultInstance();
         username = findViewById(R.id.username);
         address = findViewById(R.id.register_name);
         password = findViewById(R.id.register_password);
@@ -43,61 +49,53 @@ public class Register extends AppCompatActivity {
         tvSignIn = findViewById(R.id.login_register);
 
 
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
+
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String usern = username.getText().toString();
-                final String add = address.getText().toString();
-                final String pwd = password.getText().toString();
-                final String univ = university.getText().toString();
 
-               if (usern.isEmpty()) {
-                   username.setError("Please provide your username");
-                   username.requestFocus();
-                } else if (add.isEmpty()) {
-                    address.setError("Please provide your email");
-                   address.requestFocus();
-                } else if (univ.isEmpty()) {
-                    university.setError("Please provide your university");
+                if (username.length() == 0) {
+                    Toast.makeText(Register.this, "Enter Username", Toast.LENGTH_SHORT).show();;
+                    username.requestFocus();
+                } else if (university.length() == 0) {
+                    Toast.makeText(Register.this, "Enter University", Toast.LENGTH_SHORT).show();
                     university.requestFocus();
-                } else if (pwd.isEmpty()) {
-                    password.setError("Please provide password");
+                } else if (address.length() ==0) {
+                    Toast.makeText(Register.this, "Enter a valid email", Toast.LENGTH_SHORT).show();;
+                    address.requestFocus();
+                }else if (password.length() ==0) {
+                    Toast.makeText(Register.this, "Enter a valid password", Toast.LENGTH_SHORT).show();;
                     password.requestFocus();
-                } else if (!(add.isEmpty() && pwd.isEmpty())) {
-                    mFirebaseAuth.createUserWithEmailAndPassword(add, pwd)
-                            .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                    if (!task.isSuccessful()) {
-                                        Toast.makeText(Register.this, "SignUp Unsuccessful, Plaese Try Again!", Toast.LENGTH_SHORT).show();
-
-                                    } else {
-                                        UserDetails userDetail = new UserDetails(usern,add,univ);
-                                        String uid = task.getResult().getUser().getUid();
-                                        firebaseDatabase.getReference(uid).setValue(userDetail)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Intent intent = new Intent(Register.this,
-                                                                Login.class);
-                                                      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                                                                Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                        intent.putExtra("name", usern );
-                                                        startActivity(intent);
-                                                    }
-                                                });
-                                    }
-
-                                }
-                            });
                 } else {
-                   Toast.makeText(Register.this, "Registred", Toast.LENGTH_SHORT).show();
+
+                    try{
+
+                        realm.beginTransaction();
+                        myRealmObject = realm.createObject(UserDetails.class, UUID.randomUUID().toString());
+                        myRealmObject.setUsername(username.getText().toString());
+                        myRealmObject.setUniversity(university.getText().toString());
+                        myRealmObject.setAddress(address.getText().toString());
+                        myRealmObject.setPassword(password.getText().toString());
+                        realm.commitTransaction();
+                        Toast.makeText(Register.this, "Save success", Toast.LENGTH_SHORT).show();
+
+                    } catch (RealmPrimaryKeyConstraintException e){
+                        e.printStackTrace();
+                        Toast.makeText(Register.this, "User found on db.", Toast.LENGTH_SHORT).show
+                                ();
+                    }
+                    Intent i = new Intent(Register.this, MainActivity.class);
+                    i.putExtra("person_id", myRealmObject.getId());
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+
+
                 }
             }
+
+
+
         });
 
        tvSignIn.setOnClickListener(new View.OnClickListener() {
@@ -109,4 +107,6 @@ public class Register extends AppCompatActivity {
             }
         });
     }
+
+
 }

@@ -1,10 +1,8 @@
 package com.ajstudios.easyattendance;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,16 +10,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.ajstudios.easyattendance.realm.Class_Names;
+import com.ajstudios.easyattendance.realm.UserDetails;
 
 import java.util.Objects;
 
 import co.ceryle.radiorealbutton.library.RadioRealButton;
 import co.ceryle.radiorealbutton.library.RadioRealButtonGroup;
+import io.realm.ObjectServerError;
 import io.realm.Realm;
 import io.realm.RealmAsyncTask;
+import io.realm.SyncCredentials;
+import io.realm.SyncUser;
 
-public class Insert_class_Activity extends AppCompatActivity {
+public class Insert_class_Activity extends AppCompatActivity implements SyncUser.Callback<SyncUser> {
 
     Button create_button;
     EditText _className;
@@ -29,8 +34,9 @@ public class Insert_class_Activity extends AppCompatActivity {
 
     Realm realm;
     RealmAsyncTask transaction;
+    private UserDetails user;
 
-    private  String position_bg = "0";
+    private String position_bg = "0";
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
@@ -38,16 +44,18 @@ public class Insert_class_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_class_);
 
+
         Toolbar toolbar = findViewById(R.id.toolbar_insert_class);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
         create_button = findViewById(R.id.button_createClass);
         _className = findViewById(R.id.className_createClass);
         _subjectName = findViewById(R.id.subjectName_createClass);
 
         Realm.init(this);
         realm = Realm.getDefaultInstance();
+        Intent i=this.getIntent();
+        final String personId = i.getStringExtra("person_id");
 
         final RadioRealButton button1 = (RadioRealButton) findViewById(R.id.button1);
         final RadioRealButton button2 = (RadioRealButton) findViewById(R.id.button2);
@@ -64,6 +72,7 @@ public class Insert_class_Activity extends AppCompatActivity {
             }
         });
 
+
         create_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,9 +86,12 @@ public class Insert_class_Activity extends AppCompatActivity {
                     transaction = realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
+
                             Class_Names class_name = realm.createObject(Class_Names.class);
+
                             String id = _className.getText().toString() + _subjectName.getText().toString();
                             class_name.setId(id);
+                            class_name.setUserId(personId);
                             class_name.setName_class(_className.getText().toString());
                             class_name.setName_subject(_subjectName.getText().toString());
                             class_name.setPosition_bg(position_bg);
@@ -115,13 +127,24 @@ public class Insert_class_Activity extends AppCompatActivity {
         return !_className.getText().toString().isEmpty() && !_subjectName.getText().toString().isEmpty();
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home)
-        {
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onSuccess(SyncUser syncUser) {
+
+    }
+
+    @Override
+    public void onError(ObjectServerError error) {
+
     }
 }

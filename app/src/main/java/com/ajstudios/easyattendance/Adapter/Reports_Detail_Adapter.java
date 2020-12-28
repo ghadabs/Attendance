@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 
 import com.ajstudios.easyattendance.R;
 import com.ajstudios.easyattendance.realm.Attendance_Students_List;
 import com.ajstudios.easyattendance.viewholders.ViewHolder_reports_detail;
+
+import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmRecyclerViewAdapter;
@@ -21,6 +25,7 @@ public class Reports_Detail_Adapter extends RealmRecyclerViewAdapter<Attendance_
     RealmResults<Attendance_Students_List> mList;
     String stuID, mroomID;
     Realm realm = Realm.getDefaultInstance();
+
 
     public Reports_Detail_Adapter(RealmResults<Attendance_Students_List> list, Activity context, String roomID) {
 
@@ -50,7 +55,6 @@ public class Reports_Detail_Adapter extends RealmRecyclerViewAdapter<Attendance_
             holder.status.setText("A");
             holder.circle.setCardBackgroundColor(mActivity.getResources().getColor(R.color.red_new));
         }
+
     }
-
-
 }

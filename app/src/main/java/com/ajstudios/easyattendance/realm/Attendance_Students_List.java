@@ -14,6 +14,12 @@ public class Attendance_Students_List extends RealmObject {
     @PrimaryKey
     String unique_ID;
 
+    public Attendance_Students_List() {
+    }
+
+    public Attendance_Students_List(String studentName) {
+        this.studentName = studentName;
+    }
 
     public String getStudentName() {
         return studentName;

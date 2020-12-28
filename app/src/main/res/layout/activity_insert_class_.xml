@@ -45,12 +45,12 @@
         android:id="@+id/className_createClass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edittext_back"
-        android:padding="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:background="@drawable/edittext_back"
         android:focusedByDefault="true"
-        android:hint="Class name"/>
+        android:hint="Class name"
+        android:padding="16dp" />
 
     <TextView
         android:layout_width="match_parent"

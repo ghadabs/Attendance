@@ -21,6 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    realm {
+        syncEnabled = true;
+    }
+
 }
 
 dependencies {
@@ -46,5 +51,6 @@ dependencies {
     implementation 'com.github.ceryle:RadioRealButton:v1.3'
     implementation 'com.yarolegovich:lovely-dialog:1.1.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
 }

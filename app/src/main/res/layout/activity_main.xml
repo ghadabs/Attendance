@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/MainBack"
     tools:context=".MainActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="100dp"
         android:layout_marginTop="?attr/actionBarSize"
-        android:clipToPadding="false">
+        android:background="#FFFFFF"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/classes_sample"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="classes"
-            android:layout_marginLeft="16dp"
-            android:textColor="@color/theme_light"
-            android:layout_marginRight="16dp"/>
+            <TextView
+                android:id="@+id/classes_sample"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/indigo_daisy"
+                android:text="Classes"
+                android:textColor="@color/theme_light"
+                android:textSize="32dp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_main"
@@ -43,37 +48,41 @@
         android:id="@+id/toolbar_beginner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
         app:menu="@menu/only_dot"
-        android:background="@color/white"
-        app:title="Easy Attendance"
-        />
+        app:titleTextColor="@color/white"
+        app:title="Attendance App"
+       />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         app:fabAlignmentMode="end"
         app:fabAnimationMode="scale"
-        app:menu="@menu/bottom_app_bar"/>
+        app:menu="@menu/bottom_app_bar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/gradient_theme_oval"
-        app:layout_anchor="@id/bottomAppBar"
         app:borderWidth="0dp"
-        app:tint="@null"
-        />
+        app:layout_anchor="@id/bottomAppBar"
+        app:tint="@null" />
 
     <TextView
         android:id="@+id/out"
         android:layout_width="wrap_content"
-        android:layout_height="33dp"
-        android:layout_marginLeft="300dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="18dp"
         android:gravity="right"
-        android:text="Logout" />
+        android:text="Logout"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

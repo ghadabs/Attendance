@@ -6,14 +6,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.ajstudios.easyattendance.Adapter.ClassListAdapter;
 import com.ajstudios.easyattendance.realm.Class_Names;
+import com.ajstudios.easyattendance.realm.UserDetails;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab_main;
     RecyclerView recyclerView;
     TextView sample;
-
     ClassListAdapter mAdapter;
-
     Realm realm;
     TextView btnLogout;
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setEnterTransition(null);
         btnLogout = findViewById(R.id.out);
-
+        Intent i=this.getIntent();
+        final String personId = i.getStringExtra("person_id");
 
         bottomAppBar = findViewById(R.id.bottomAppBar);
         fab_main = findViewById(R.id.fab_main);
@@ -49,15 +57,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Insert_class_Activity.class);
+                intent.putExtra("person_id", personId);
                 startActivity(intent);
             }
         });
 
         realm = Realm.getDefaultInstance();
-
+        UserDetails person = realm.where(UserDetails.class).equalTo("id", personId).findFirst();
         RealmResults<Class_Names> results;
 
         results = realm.where(Class_Names.class)
+               .equalTo("userId", person.getId())
                 .findAll();
 
 
@@ -80,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
     }
 
