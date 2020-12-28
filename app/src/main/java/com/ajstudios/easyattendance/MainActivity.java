@@ -19,14 +19,23 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.ajstudios.easyattendance.Adapter.ClassListAdapter;
+import com.ajstudios.easyattendance.Adapter.StudentsListAdapter;
+import com.ajstudios.easyattendance.realm.Attendance_Reports;
 import com.ajstudios.easyattendance.realm.Class_Names;
+import com.ajstudios.easyattendance.realm.Students_List;
 import com.ajstudios.easyattendance.realm.UserDetails;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
     TextView sample;
     ClassListAdapter mAdapter;
     Realm realm;
-    TextView btnLogout;
-
+    TextView btnLogout,place_holder;
+    RealmChangeListener realmChangeListener;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -52,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         final String personId = i.getStringExtra("person_id");
 
         bottomAppBar = findViewById(R.id.bottomAppBar);
+        place_holder = findViewById(R.id.placeholder_detail1);
+        place_holder.setVisibility(View.GONE);
         fab_main = findViewById(R.id.fab_main);
         fab_main.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,12 +74,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         realm = Realm.getDefaultInstance();
-        UserDetails person = realm.where(UserDetails.class).equalTo("id", personId).findFirst();
+        final UserDetails person = realm.where(UserDetails.class).equalTo("id", personId).findFirst();
         RealmResults<Class_Names> results;
 
         results = realm.where(Class_Names.class)
-               .equalTo("userId", person.getId())
-                .findAll();
+               .equalTo("userId", person.getId()).findAll();
 
 
         sample = findViewById(R.id.classes_sample);
@@ -91,8 +101,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     @Override
@@ -110,5 +118,40 @@ public class MainActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+    public void RealmInit(){
+
+        Realm.init(this);
+        realm = Realm.getDefaultInstance();
+        Intent i=this.getIntent();
+        final String personId = i.getStringExtra("person_id");
+        final UserDetails person = realm.where(UserDetails.class).equalTo("id", personId).findFirst();
+        realmChangeListener = new RealmChangeListener() {
+            @Override
+            public void onChange(Object o) {
+                long count = realm.where(Class_Names.class)
+                        .equalTo("userId", person.getId())
+                        .count();
+
+                    if (!(count==0)){
+                        place_holder.setVisibility(View.GONE);
+                    }else if (count==0) {
+                        place_holder.setVisibility(View.VISIBLE);
+                    }
+
+            }
+        };
+        realm.addChangeListener(realmChangeListener);
+
+        long count = realm.where(Class_Names.class)
+                .equalTo("userId", person.getId())
+                .count();
+
+            if (!(count==0)){
+                place_holder.setVisibility(View.GONE);
+            }else if (count==0){
+                place_holder.setVisibility(View.VISIBLE);
+            }
+
     }
 }

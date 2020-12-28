@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    >
+    android:background="@color/white">
 
 
         <EditText
@@ -18,7 +17,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="16dp"
-            android:hint="Student name"/>
+            android:hint="Student Name"/>
         <EditText
             android:id="@+id/regNo_student_popup"
             android:layout_width="match_parent"
@@ -60,26 +59,27 @@
                     android:text="Cancel"
                     android:textSize="16sp"
                     android:foreground="?attr/selectableItemBackground"
-                    android:textColor="@color/theme_light"
-                    android:background="@color/white"
+                    android:textColor="@color/white"
                     android:layout_marginEnd="3dp"
                     android:gravity="center"
+                    android:background="@drawable/button_back"
                     tools:ignore="UnusedAttribute" />
+
                 <TextView
                     android:id="@+id/add_btn_popup"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="3dp"
                     android:layout_weight="1"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
                     android:padding="10dp"
                     android:text="Add"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:layout_marginStart="3dp"
-                    android:background="@color/white"
-                    android:textColor="@color/theme_light"
-                    android:gravity="center"
-                    tools:targetApi="m"
-                    tools:ignore="UnusedAttribute" />
+                    tools:ignore="UnusedAttribute"
+                    android:background="@drawable/button_back"
+                    tools:targetApi="m" />
 
 
         </LinearLayout>

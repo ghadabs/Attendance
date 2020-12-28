@@ -48,7 +48,7 @@
         android:id="@+id/toolbar_beginner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@drawable/gradient_theme"
         app:menu="@menu/only_dot"
         app:titleTextColor="@color/white"
         app:title="Attendance App"
@@ -75,14 +75,21 @@
 
     <TextView
         android:id="@+id/out"
-        android:layout_width="wrap_content"
+        android:layout_width="77dp"
         android:layout_height="36dp"
-        android:layout_marginLeft="290dp"
+        android:layout_marginLeft="300dp"
         android:layout_marginTop="18dp"
         android:gravity="right"
         android:text="Logout"
         android:textColor="@color/black"
-        android:textSize="15sp"
-         />
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/placeholder_detail1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp"
+        android:text="Add Classes !" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

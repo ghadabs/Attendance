@@ -2,9 +2,12 @@ package com.ajstudios.easyattendance;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -52,8 +55,6 @@ public class Reports_Detail_Activity extends AppCompatActivity {
         toolbar_title.setText(date);
         subj.setText(subjName);
         className.setText(classname);
-
-
 
         RealmResults<Attendance_Students_List> list = realm.where(Attendance_Students_List.class)
                             .equalTo("date_and_classID", room_ID)

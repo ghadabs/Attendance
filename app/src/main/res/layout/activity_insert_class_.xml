@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="Create Class"
+        app:titleTextColor="@color/white"
+        android:background="@drawable/gradient_theme"
         />
 
     <TextView
@@ -25,6 +27,7 @@
         android:layout_marginBottom="16dp"
         android:textColor="@color/text_color_dark"
         android:focusedByDefault="false"
+
         android:layout_marginTop="16dp"/>
 
 
@@ -60,7 +63,8 @@
         android:layout_marginRight="16dp"
         android:textColor="@color/text_color_dark"
         android:textSize="18dp"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="12dp"
+        android:textStyle="bold"/>
 
     <co.ceryle.radiorealbutton.library.RadioRealButtonGroup
         android:id="@+id/group"
@@ -141,13 +145,14 @@
 
     <Button
         android:id="@+id/button_createClass"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="create"
-        android:background="@drawable/button_back"
-        android:padding="8dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
         android:layout_marginTop="16dp"
-        android:layout_gravity="center"/>
+        android:background="@drawable/button_back"
+        android:padding="12dp"
+        android:text="create"
+        android:textColor="@color/white" />
 
 </LinearLayout>

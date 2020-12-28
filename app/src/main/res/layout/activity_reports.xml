@@ -12,18 +12,28 @@
         android:layout_height="wrap_content"
         app:title=" "
         app:menu="@menu/detail_class_menu"
-        app:popupTheme="@style/MyToolbarStyle"/>
+        app:popupTheme="@style/MyToolbarStyle"
+        android:background="@drawable/gradient_theme"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Atendance Reports :"
+        android:text="Atendance Reports"
         android:textColor="@color/theme_light"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:fontFamily="@font/indigo_daisy"
+        android:textSize="32dp"
+        android:textStyle="bold"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_reports"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"/>
-
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="12dp"
+        />
 </LinearLayout>

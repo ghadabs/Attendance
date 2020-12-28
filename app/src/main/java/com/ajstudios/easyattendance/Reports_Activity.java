@@ -2,6 +2,7 @@ package com.ajstudios.easyattendance;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,7 @@ public class Reports_Activity extends AppCompatActivity {
         room_ID = getIntent().getStringExtra("room_ID");
 
         recyclerView = findViewById(R.id.recyclerView_reports);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar_reports);
         setSupportActionBar(toolbar);

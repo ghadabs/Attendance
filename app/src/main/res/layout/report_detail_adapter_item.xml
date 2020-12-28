@@ -25,7 +25,7 @@
             android:id="@+id/student_regNo_report_detail_adapter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:text="9633117104030"/>
     </LinearLayout>
 
@@ -52,5 +52,4 @@
                 android:layout_gravity="center"/>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
-
 </LinearLayout>

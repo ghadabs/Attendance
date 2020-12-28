@@ -78,17 +78,13 @@ public class Insert_class_Activity extends AppCompatActivity implements SyncUser
             public void onClick(View view) {
 
                 if (isValid()) {
-
                     final ProgressDialog progressDialog = new ProgressDialog(Insert_class_Activity.this);
                     progressDialog.setMessage("Creating class..");
                     progressDialog.show();
-
                     transaction = realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-
                             Class_Names class_name = realm.createObject(Class_Names.class);
-
                             String id = _className.getText().toString() + _subjectName.getText().toString();
                             class_name.setId(id);
                             class_name.setUserId(personId);
@@ -113,20 +109,14 @@ public class Insert_class_Activity extends AppCompatActivity implements SyncUser
                 }else{
                     Toast.makeText(Insert_class_Activity.this, "Fill all details", Toast.LENGTH_SHORT).show();
                 }
-
-                //-------
-
             }
         });
-
-
     }
+
 
     public boolean isValid(){
-
         return !_className.getText().toString().isEmpty() && !_subjectName.getText().toString().isEmpty();
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
