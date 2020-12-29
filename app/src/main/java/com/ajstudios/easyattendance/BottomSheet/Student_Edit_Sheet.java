@@ -1,6 +1,10 @@
 package com.ajstudios.easyattendance.BottomSheet;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +15,10 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.ajstudios.easyattendance.ClassDetail_Activity;
 import com.ajstudios.easyattendance.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -20,6 +27,7 @@ public class Student_Edit_Sheet extends BottomSheetDialogFragment {
     public String _name, _regNo, _mobNo;
     public EditText name_student, regNo_student, mobNo_student;
     public CardView call;
+
 
     public Student_Edit_Sheet(String stuName, String regNo, String mobileNo) {
         _name = stuName;
@@ -37,7 +45,7 @@ public class Student_Edit_Sheet extends BottomSheetDialogFragment {
         mobNo_student = v.findViewById(R.id.stu_mobNo_edit);
         call = v.findViewById(R.id.call_edit);
 
-        name_student.setText(_name);
+        name_student.setText(_name.substring(0,1).toUpperCase()+_name.substring(1));
         regNo_student.setText(_regNo);
         mobNo_student.setText(_mobNo);
 
@@ -45,7 +53,7 @@ public class Student_Edit_Sheet extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 String uri = "tel:" + _mobNo.trim();
-                Intent intent = new Intent(Intent.ACTION_DIAL);
+                Intent intent = new Intent(Intent.ACTION_CALL);
                 intent.setData(Uri.parse(uri));
                 startActivity(intent);
             }
@@ -53,4 +61,5 @@ public class Student_Edit_Sheet extends BottomSheetDialogFragment {
 
         return v;
     }
+
 }

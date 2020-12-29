@@ -1,17 +1,22 @@
 package com.ajstudios.easyattendance;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -58,8 +63,7 @@ public class ClassDetail_Activity extends AppCompatActivity {
     private EditText student_name, reg_no, mobile_no;
     private LinearLayout layout_attendance_taken;
     private RecyclerView mRecyclerview;
-
-
+    boolean permissionCall=false;
     String room_ID, subject_Name, class_Name;
 
     public static final String TAG = "ClassDetail_Activity";
@@ -95,7 +99,7 @@ public class ClassDetail_Activity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_disease_detail);
-        collapsingToolbarLayout.setTitle(subject_Name);
+        collapsingToolbarLayout.setTitle(subject_Name.substring(0,1).toUpperCase()+subject_Name.substring(1).toLowerCase());
 
         themeImage = findViewById(R.id.image_disease_detail);
         className = findViewById(R.id.classname_detail);
@@ -104,7 +108,7 @@ public class ClassDetail_Activity extends AppCompatActivity {
         layout_attendance_taken.setVisibility(View.GONE);
         addStudent = findViewById(R.id.add_students);
         reports_open = findViewById(R.id.reports_open_btn);
-        className.setText(class_Name);
+        className.setText(class_Name.substring(0,1).toUpperCase()+class_Name.substring(1));
         mRecyclerview = findViewById(R.id.recyclerView_detail);
         progressBar = findViewById(R.id.progressbar_detail);
         place_holder = findViewById(R.id.placeholder_detail);
@@ -207,7 +211,7 @@ public class ClassDetail_Activity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
 
-                                    String name = student_name.getText().toString();
+                                    String name = student_name.getText().toString().substring(0,1).toUpperCase()+student_name.getText().toString().substring(1).toLowerCase();
                                     String regNo = reg_no.getText().toString();
                                     String mobNo = mobile_no.getText().toString();
 
@@ -230,6 +234,18 @@ public class ClassDetail_Activity extends AppCompatActivity {
 
             }
         });
+
+        // *****traitement des permissions de call*****
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED){
+            permissionCall=true;
+        }
+        else{
+            ActivityCompat.requestPermissions(this,
+                    new String[]{
+                            Manifest.permission.CALL_PHONE
+                    },
+                    3);
+        }
 
     }
 
@@ -350,8 +366,8 @@ public class ClassDetail_Activity extends AppCompatActivity {
                             attendance_reports.setDateOnly(dateOnly);
                             attendance_reports.setMonthOnly(monthOnly);
                             attendance_reports.setDate_and_classID(date+room_ID);
-                            attendance_reports.setClassname(class_Name);
-                            attendance_reports.setSubjName(subject_Name);
+                            attendance_reports.setClassname(class_Name.substring(0,1).toUpperCase()+class_Name.substring(1).toLowerCase());
+                            attendance_reports.setSubjName(subject_Name.substring(0,1).toUpperCase()+subject_Name.substring(1).toLowerCase());
 
                         }
                     });
@@ -449,6 +465,18 @@ public class ClassDetail_Activity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 3){
+            if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                permissionCall=true;
+            }
+            else{
+                this.finish();
+            }
+        }
     }
 
 

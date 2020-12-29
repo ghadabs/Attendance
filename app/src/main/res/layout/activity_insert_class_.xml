@@ -42,6 +42,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:focusedByDefault="true"
+        android:inputType="textCapWords"
         android:hint="Subject name"/>
 
     <EditText
@@ -53,6 +54,7 @@
         android:background="@drawable/edittext_back"
         android:focusedByDefault="true"
         android:hint="Class name"
+        android:inputType="textCapWords"
         android:padding="16dp" />
 
     <TextView

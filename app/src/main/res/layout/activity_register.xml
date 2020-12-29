@@ -35,7 +35,8 @@
         android:layout_marginBottom="12dp"
         android:background="@drawable/edittext_back"
         android:focusedByDefault="true"
-        android:hint="Name"
+        android:hint="Username"
+        android:inputType="textCapWords"
         android:drawableStart="@drawable/ic_baseline_person_add"
         android:drawablePadding="16dp"
         android:padding="16dp" />
@@ -43,6 +44,7 @@
         android:id="@+id/register_university"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textCapWords"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="12dp"

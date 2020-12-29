@@ -46,7 +46,7 @@ public class Reports_Detail_Adapter extends RealmRecyclerViewAdapter<Attendance_
     @Override
     public void onBindViewHolder(@NonNull ViewHolder_reports_detail holder, int position) {
         Attendance_Students_List temp = getItem(position);
-        holder.namE.setText(temp.getStudentName());
+        holder.namE.setText(temp.getStudentName().substring(0,1).toUpperCase()+temp.getStudentName().substring(1).toLowerCase());
         holder.regNo.setText(temp.getStudentRegNo());
         if (temp.getAttendance().equals("Present")){
             holder.status.setText("P");

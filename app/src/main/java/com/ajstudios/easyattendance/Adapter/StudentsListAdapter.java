@@ -43,7 +43,7 @@ public class StudentsListAdapter extends RealmRecyclerViewAdapter<Students_List,
     @Override
     public void onBindViewHolder(@NonNull ViewHolder_students holder, final int position) {
         Students_List temp = getItem(position);
-        holder.student_name.setText(temp.getName_student());
+        holder.student_name.setText(temp.getName_student().substring(0,1).toUpperCase()+temp.getName_student().substring(1).toLowerCase());
         holder.student_regNo.setText(temp.getRegNo_student());
 
 

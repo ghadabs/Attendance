@@ -17,6 +17,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="16dp"
+            android:inputType="textCapWords"
             android:hint="Student Name"/>
         <EditText
             android:id="@+id/regNo_student_popup"
@@ -26,6 +27,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
+            android:inputType="textCapWords"
             android:layout_marginTop="5dp"
             android:hint="Reg. No"/>
         <EditText

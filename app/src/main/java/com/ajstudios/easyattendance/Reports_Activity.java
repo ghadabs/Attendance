@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.method.TextKeyListener;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -40,8 +41,8 @@ public class Reports_Activity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar_reports);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(subjectName);
-        toolbar.setSubtitle(className);
+        toolbar.setTitle(subjectName.substring(0,1).toUpperCase()+subjectName.substring(1).toLowerCase());
+        toolbar.setSubtitle(className.substring(0,1).toUpperCase()+className.substring(1).toLowerCase());
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 

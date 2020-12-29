@@ -71,8 +71,8 @@ public class ClassListAdapter extends RealmRecyclerViewAdapter<Class_Names, View
                 .equalTo("class_id", temp.getId())
                 .count();
         holder.total_students.setText("Students : " + count);
-        holder.class_name.setText(temp.getName_class());
-        holder.subject_name.setText(temp.getName_subject());
+        holder.class_name.setText(temp.getName_class().substring(0,1).toUpperCase()+temp.getName_class().substring(1));
+        holder.subject_name.setText(temp.getName_subject().substring(0,1).toUpperCase()+temp.getName_subject().substring(1));
 
         switch (temp.getPosition_bg()) {
             case "0":

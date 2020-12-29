@@ -69,6 +69,7 @@
         android:id="@+id/stu_name_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textCapWords"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -80,7 +81,7 @@
         android:id="@+id/stu_regNo_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:inputType="textCapWords"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -92,7 +93,7 @@
         android:id="@+id/stu_mobNo_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:inputType="number"
         />
     <TextView
         android:layout_width="match_parent"

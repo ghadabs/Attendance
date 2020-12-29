@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/className_adapter"
                 android:layout_marginTop="20dp"
-                android:text="students: 0"
+                android:text="Students: 0"
                 android:textColor="@color/white" />
         </RelativeLayout>
 

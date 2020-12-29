@@ -53,8 +53,8 @@ public class Reports_Detail_Activity extends AppCompatActivity {
         className = findViewById(R.id.classname_report_detail);
         toolbar_title = findViewById(R.id.toolbar_title);
         toolbar_title.setText(date);
-        subj.setText(subjName);
-        className.setText(classname);
+        subj.setText(subjName.substring(0,1).toUpperCase()+subjName.substring(1));
+        className.setText(classname.substring(0,1).toUpperCase()+classname.substring(1));
 
         RealmResults<Attendance_Students_List> list = realm.where(Attendance_Students_List.class)
                             .equalTo("date_and_classID", room_ID)
