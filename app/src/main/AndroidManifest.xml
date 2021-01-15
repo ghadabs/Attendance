@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ajstudios.easyattendance">
+    package="com.Attendance.AttendanceApp">
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -11,18 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Reports_Detail_Activity"
+            android:name="com.Attendance.AttendanceApp.Reports_Detail_Activity"
             android:theme="@style/AppTheme2" />
-        <activity android:name=".Reports_Activity" />
-        <activity android:name=".Register" />
-        <activity android:name=".MainActivity" />
+        <activity android:name="com.Attendance.AttendanceApp.Reports_Activity" />
+        <activity android:name="com.Attendance.AttendanceApp.Register" />
+        <activity android:name="com.Attendance.AttendanceApp.MainActivity" />
         <activity
-            android:name=".ClassDetail_Activity"
+            android:name="com.Attendance.AttendanceApp.ClassDetail_Activity"
             android:theme="@style/FullScreenTheme" />
         <activity
-            android:name=".Insert_class_Activity"
+            android:name="com.Attendance.AttendanceApp.Insert_class_Activity"
             android:theme="@style/AppTheme2" />
-        <activity android:name=".Login">
+        <activity android:name="com.Attendance.AttendanceApp.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
