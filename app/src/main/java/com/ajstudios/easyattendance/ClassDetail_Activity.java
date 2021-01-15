@@ -2,6 +2,7 @@ package com.ajstudios.easyattendance;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -14,6 +15,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -36,6 +38,7 @@ import android.widget.Toast;
 import com.ajstudios.easyattendance.Adapter.StudentsListAdapter;
 import com.ajstudios.easyattendance.realm.Attendance_Reports;
 import com.ajstudios.easyattendance.realm.Attendance_Students_List;
+import com.ajstudios.easyattendance.realm.Class_Names;
 import com.ajstudios.easyattendance.realm.Students_List;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.yarolegovich.lovelydialog.LovelyCustomDialog;
@@ -54,7 +57,7 @@ import io.realm.RealmList;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
-public class ClassDetail_Activity extends AppCompatActivity {
+public class ClassDetail_Activity extends AppCompatActivity implements DialogInterface.OnClickListener{
 
     private ImageView themeImage;
     private TextView className, total_students, place_holder;
@@ -77,7 +80,7 @@ public class ClassDetail_Activity extends AppCompatActivity {
 
     ProgressBar progressBar;
     Dialog lovelyCustomDialog;
-
+    Button delete;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -115,6 +118,7 @@ public class ClassDetail_Activity extends AppCompatActivity {
         place_holder.setVisibility(View.GONE);
         submit_btn = findViewById(R.id.submit_attendance_btn);
         submit_btn.setVisibility(View.GONE);
+        delete=findViewById(R.id.deleteClass_btn);
 
         switch (theme) {
             case "0":
@@ -175,6 +179,20 @@ public class ClassDetail_Activity extends AppCompatActivity {
 
             }
         });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert=new AlertDialog.Builder(ClassDetail_Activity.this);
+                alert.setTitle("DELETE !");
+                alert.setMessage("Would you like to delete this class ?");
+                alert.setPositiveButton("Yes",ClassDetail_Activity.this);
+                alert.setNegativeButton("No",ClassDetail_Activity.this);
+                alert.show();
+
+            }
+        });
+
 
         reports_open.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -480,4 +498,21 @@ public class ClassDetail_Activity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        if(which==dialog.BUTTON_POSITIVE){
+            realm.beginTransaction();
+            RealmResults<Class_Names> result = realm.where(Class_Names.class)
+                    .equalTo("id", room_ID).findAll();
+
+            result.deleteAllFromRealm();
+            Intent i = new Intent(ClassDetail_Activity.this, MainActivity.class);
+            startActivity(i);
+            realm.commitTransaction();
+        }
+        if(which==dialog.BUTTON_NEGATIVE){
+           dialog.dismiss();
+        }
+
+    }
 }

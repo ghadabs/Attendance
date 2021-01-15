@@ -26,6 +26,14 @@ public class UserDetails  extends RealmObject {
         this.id = id;
     }
 
+    public Class_Names getClassNames() {
+        return ClassNames;
+    }
+
+    public void setClassNames(Class_Names classNames) {
+        ClassNames = classNames;
+    }
+
     public String getId() {
         return id;
     }

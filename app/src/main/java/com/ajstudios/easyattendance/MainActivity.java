@@ -11,12 +11,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ajstudios.easyattendance.Adapter.ClassListAdapter;
 import com.ajstudios.easyattendance.Adapter.StudentsListAdapter;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     Realm realm;
     TextView btnLogout,place_holder;
     RealmChangeListener realmChangeListener;
+    private Handler handler = new Handler();
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -101,6 +104,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                RealmInit();
+            }
+        };
+        handler.postDelayed(r, 500);
+
     }
 
     @Override
@@ -120,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
     public void RealmInit(){
-
         Realm.init(this);
         realm = Realm.getDefaultInstance();
         Intent i=this.getIntent();
@@ -130,9 +140,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChange(Object o) {
                 long count = realm.where(Class_Names.class)
-                        .equalTo("userId", person.getId())
+                        .equalTo("userId", personId)
                         .count();
-
                     if (!(count==0)){
                         place_holder.setVisibility(View.GONE);
                     }else if (count==0) {
@@ -144,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         realm.addChangeListener(realmChangeListener);
 
         long count = realm.where(Class_Names.class)
-                .equalTo("userId", person.getId())
+                .equalTo("userId", personId)
                 .count();
 
             if (!(count==0)){
